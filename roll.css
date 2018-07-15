@@ -1,0 +1,9 @@
+.roll-container{
+    margin-top: 0;
+    margin-bottom:0; 
+    padding-left: 0;
+    overflow: hidden;
+}
+.roll-item{
+    position: relative;
+}
