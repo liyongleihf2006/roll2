@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="./roll.css">
     <style>
         #roll2{
-            height: 100px;
+            height: 224px;
             border: 1px solid;
+        }
+        .roll-content{
+            padding: 5 0 5 20px;
         }
     </style>
 </head>
@@ -21,11 +24,12 @@
     <script>
         $("#roll2").roll({
             speed:50,
-            data:["第一行","第二行","第三行","第四行","第五行","第六行","第七行"],
+            data:["第一行","第二行","第三行","第四行","第五行","第六行","第七行","第八行","第九行","第十行","第十一行","第十二行","第十三行","第十四行"],
             formatter:function(item){
                 var $self = this;
-                return $("<span/>",{
+                return $("<div/>",{
                     "text":item,
+                    "class":"roll-content",
                     "mouseenter":function(){
                         $self.roll("pause");
                     },

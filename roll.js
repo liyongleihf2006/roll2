@@ -68,40 +68,56 @@
         params=$self.data("roll"),
         data = params.data,
         formatter = params.formatter,
-        speed = params.speed,
-        multData = data.concat(data);
+        speed = params.speed;
         $self.addClass("roll-container").html(
-            data.map(function(item){
-                return $("<li/>",{
-                    class:"roll-item",
-                    html:formatter.call($self,item)
-                })
-            })
-        )
-        if(self.scrollHeight>self.clientHeight){
-            $self.addClass("roll-container").html(
-                multData.map(function(item){
+            [$("<div/>",{
+                class:"roll-inner"
+            }).append(
+                data.map(function(item){
                     return $("<li/>",{
-                        "class":"roll-item",
+                        class:"roll-item",
                         html:formatter.call($self,item)
                     })
                 })
+            )]
+        )
+        if(self.scrollHeight>self.clientHeight){
+            $self.addClass("roll-container").html(
+                [$("<div/>",{
+                    class:"roll-inner"
+                }).append(
+                    data.map(function(item){
+                        return $("<li/>",{
+                            class:"roll-item",
+                            html:formatter.call($self,item)
+                        })
+                    })
+                ),$("<div/>",{
+                    class:"roll-inner"
+                }).append(
+                    data.map(function(item){
+                        return $("<li/>",{
+                            class:"roll-item",
+                            html:formatter.call($self,item)
+                        })
+                    })
+                )]
             )
             setInterval(function(){
                 if(!params.pause){
                     var first = self.firstElementChild;
-                    $self.find(".roll-item").each(function(i,item){
-                        item.style.top =parseFloat(item.style.top||0) - speed/50+"px";
-                    })
+                    $self.find(".roll-inner").each(function(i,inner){
+                        inner.style.top =parseFloat(inner.style.top||0) - speed/(1000/17)+"px";
+                    });
                     if(parseFloat(first.style.top||0)+first.offsetHeight<0){
-                        $self.find(".roll-item").each(function(i,item){
-                            item.style.top =0;
-                        })
+                        $self.find(".roll-inner").each(function(i,inner){
+                            inner.style.top = 0;
+                        });
                         $self.append(first);
                     }
                 }
 
-            },20)
+            },17)
         }
     }
     function setData(data){
