@@ -19,6 +19,8 @@
 <body>
     <ul id="roll2">
     </ul>
+    <button id="pause">暂停</button>
+    <button id="run">继续</button>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script src="./roll.js" ></script>
     <script>
@@ -30,14 +32,20 @@
                 return $("<div/>",{
                     "text":item,
                     "class":"roll-content",
-                    "mouseenter":function(){
+                    "mouseover":function(){
                         $self.roll("pause");
                     },
-                    "mouseleave":function(){
+                    "mouseout":function(){
                         $self.roll("run");
                     }
                 })
             }
+        });
+        $("#pause").on("click",function(){
+            $("#roll2").roll("pause");
+        });
+        $("#run").on("click",function(){
+            $("#roll2").roll("run");
         });
     </script>
 </body>
