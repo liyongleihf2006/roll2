@@ -109,19 +109,21 @@
             self = $self.get(0),
             params = $self.data("roll"),
             speed = params.speed;
-        params._t = setTimeout(function () {
-            var first = self.firstElementChild;
-            $self.find(".roll-inner").each(function (i, inner) {
-                inner.style.top = parseFloat(inner.style.top || 0) - speed / (1000 / 17) + "px";
-            });
-            if (parseFloat(first.style.top || 0) + first.offsetHeight < 0) {
-                $self.find(".roll-inner").each(function (i, inner) {
-                    inner.style.top = 0;
-                });
-                $self.append(first);
+            if (self.scrollHeight > self.clientHeight) {
+                params._t = setTimeout(function () {
+                    var first = self.firstElementChild;
+                    $self.find(".roll-inner").each(function (i, inner) {
+                        inner.style.top = parseFloat(inner.style.top || 0) - speed / (1000 / 17) + "px";
+                    });
+                    if (parseFloat(first.style.top || 0) + first.offsetHeight < 0) {
+                        $self.find(".roll-inner").each(function (i, inner) {
+                            inner.style.top = 0;
+                        });
+                        $self.append(first);
+                    }
+                    doRoll.call($self);
+                }, 17)
             }
-            doRoll.call($self);
-        }, 17)
     }
     function setData(data) {
         var params = this.data('roll');
